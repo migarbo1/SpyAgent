@@ -53,7 +53,7 @@ line_composer = {
     ("mascota", "Pez"): " los peces. ¿Tienes uno como mascota? Yo tengo uno se llama burbuja como la supernena, porque también es azul. ¿Nos hacemos amigos y hablamos más sobre peces?",
     ("mascota", "Conejo"): " los conejos. ¿Tienes uno como mascota? Yo tengo uno se llama pompón, es muy juguetón. ¿Nos hacemos amigos y hablamos más sobre conejos?",
     ("mascota", "Tortuga"): " las Tortugas. ¿Tienes una como mascota?",
-    ("música", "Pop"): " escuchar Pop. ¿Cuál es tu grupo favorito?",
+    ("música", "Pop"): " escuchar Pop. ¿Cuál es tu grupo favorito?"
 
 
 
@@ -133,7 +133,7 @@ def message_creator(num_mes, user_guid):
         print("about to send a message")
         user_com[user_guid] += 1
         sub = "Hola, soy " + stalker.agName
-        con = "He visto en tu perfil que a ti tambien te gusta" + "TO DO " + \
+        con = "He visto en tu perfil que a ti tambien te gusta " + "TO DO " + \
                   "¿Qué te parece si quedamos y hacemos " + "TO DO ?"
 
 
