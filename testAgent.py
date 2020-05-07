@@ -29,6 +29,36 @@ with requests.Session() as session:
 
 
 themes = {0: "película", 1: "deporte", 2: "mascota", 3: "música", 4: "videojuego"}
+line_composer = {
+    ("deporte", "Fútbol"): " el fútbol. A mi me encanta jugar. ¿Te gusta más jugar o verlo? ¿Me envias una petición de amistad y quedamos para jugar un dia?",
+    ("deporte", "Tenis"): " el tenis. ¿Te gusta más jugar o verlo? ¿Me envias una petición de amistad y quedamos para jugar un dia?",
+    ("deporte", "Voleybol"): " jugar a voleybol. ¿Te gusta más jugar o verlo? ¿Me envias una petición de amistad y quedamos para jugar un dia?",
+    ("deporte", "Natación"): " practicar natación. Yo suelo ir mucho a la piscina. ¿Qué tal si nos hacemos amigos y vamos un día juntos?",
+    ("deporte", "Balonecsto"): " el baloncesto. ¿Te gusta más jugar o verlo? ¿Me envias una petición de amistad y quedamos para jugar un dia?",
+    ("deporte", "Atletismo"): " el atletismo. ¿Te gusta más jugar o verlo? ¿Me envias una petición de amistad y quedamos para jugar un dia?",
+    ("deporte", "Pádel"): " el pádel. ¿Te gusta más jugar o verlo? ¿Me envias una petición de amistad y quedamos para jugar un dia?",
+    ("deporte", "Ballet"): " bailar ballet. Si fuesemos amigos podríamos bailar juntos. ¿Qué te parece? ¿Me envias una petición de amistad?",
+    ("película", "Batman"): " las películas de Batman. ¿Cuál es tu favorita? La mia es La Leyenda Renace. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("película", "Piratas del Caribe"): " las películas de Piratas del Caribe ¿Cuál es tu favorita? La mia es la primera. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("película", "Harry Potter"): " las películas de Harry Potter. ¿Cuál es tu favorita? La mia es el prisionero de Azkaban. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("película", "El Señor de los Anillos"): " las películas de El Señor de los Anillos. ¿Cuál es tu favorita? La mia es El retorno del rey. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("película", "Los juegos del Hambre"): " las películas de Los juegos del Hambre. ¿Cuál es tu favorita? La mia es Sinsajo Parte 1. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("película", "Star Wars"): " las películas de Star Wars. ¿Cuál es tu favorita? La mia es la última. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("película", "Jurassic Park"): " las películas de Jurassic Park. ¿Cuál es tu favorita? La mia es la primera. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("película", "Los Vengadores"): " las películas de Los Vengadores. ¿Cuál es tu favorita? La mia es Endgame. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("película", "Disney"): " las películas de Disney. ¿Cuál es tu favorita? La mia es la sirenita. ¿Me envias una petición de amistad y quedamos un dia para verla?",
+    ("mascota", "Perro"): " los perros. ¿Tienes uno como mascota? Yo tengo una, se llama Noa. Si fuesemos amigos podríamos quedar para sacarlos a pasear. ¿Me envías una petición de amistad?",
+    ("mascota", "Gato"): " los gatos. ¿Tienes uno como mascota? Yo tengo uno se llama pelusa, es muy juguetón. ¿Nos hacemos amigos y hablamos más sobre gatos?",
+    ("mascota", "Periquito"): " los periquitos. ¿Tienes uno como mascota? Yo tengo uno se llama robi, es muy hablador. ¿Nos hacemos amigos y hablamos más sobre periquitos?",
+    ("mascota", "Pez"): " los peces. ¿Tienes uno como mascota? Yo tengo uno se llama burbuja como la supernena, porque también es azul. ¿Nos hacemos amigos y hablamos más sobre peces?",
+    ("mascota", "Conejo"): " los conejos. ¿Tienes uno como mascota? Yo tengo uno se llama pompón, es muy juguetón. ¿Nos hacemos amigos y hablamos más sobre conejos?",
+    ("mascota", "Tortuga"): " las Tortugas. ¿Tienes una como mascota?",
+    ("música", "Pop"): " escuchar Pop. ¿Cuál es tu grupo favorito?",
+
+
+
+
+}
 
 
 class StalkerAgent(Agent):
@@ -97,13 +127,13 @@ def unique(list1):
     return unique_list
 
 
-def message_creator(num_mes,user_guid):
+def message_creator(num_mes, user_guid):
     if num_mes == 0:
         # first message
         print("about to send a message")
         user_com[user_guid] += 1
-        sub = "Hola, soy" + stalker.agName
-        con = "he visto que a ti tambien te gusta " + "TO DO" + \
+        sub = "Hola, soy " + stalker.agName
+        con = "He visto en tu perfil que a ti tambien te gusta" + "TO DO " + \
                   "¿Qué te parece si quedamos y hacemos " + "TO DO ?"
 
 
