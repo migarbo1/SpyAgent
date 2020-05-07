@@ -1,0 +1,16 @@
+COPYING.LESSER
+COPYING.gpl3
+LICENSES
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+aiosasl/__init__.py
+aiosasl/channel_binding_methods.py
+aiosasl/stringprep.py
+aiosasl/utils.py
+aiosasl/version.py
+aiosasl.egg-info/PKG-INFO
+aiosasl.egg-info/SOURCES.txt
+aiosasl.egg-info/dependency_links.txt
+aiosasl.egg-info/top_level.txt
