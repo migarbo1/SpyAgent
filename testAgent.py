@@ -135,13 +135,13 @@ class StalkerAgent(Agent):
                         if user_by_theme.get(i, 0) == 0:
                             user_by_theme[i] = []
 
-                        user_by_theme[i] += content.keys()
+                        user_by_theme[i] += list(map(int, content.keys()))
                         user_by_theme[i] = unique((user_by_theme[i]))
 
                         print(user_by_theme)
                         for guid in user_by_theme[i]:
-                            if user_com.get(guid, 0) == 0:
-                                user_com[guid] = 0
+                            if user_com.get(int(guid), 0) == 0:
+                                user_com[int(guid)] = 0
                 else:
                     print('failed')
                 print(content)
@@ -159,8 +159,7 @@ class StalkerAgent(Agent):
                                                    'agentGUID': sID,
                                                    'receiverGUID': uID,
                                                    'subject': subject,
-                                                   'content': content
-                                                   })
+                                                   'content': content})
                     if sender:
                         print("éxito")
                         print(sender.json())
@@ -215,7 +214,7 @@ def message_creator(num_mes, user_guid, t):
 if __name__ == "__main__":
     user_com = {}
     user_by_theme = {}
-    stalker = StalkerAgent('1421', "agente1@localhost", "agente1", "Manolo")
+    stalker = StalkerAgent(1421, "agente1@localhost", "agente1", "Manolo")
     stalker.start()
 
     print("Wait until user interrupts with ctrl+C")
