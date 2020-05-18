@@ -129,6 +129,7 @@ class StalkerAgent(Agent):
                                                 'theme': i,
                                                 'agentGUID': stalker.guid})
                 if response:
+                    print(response.text)
                     content = response.json()
                     if content['status'] != -1:
                         content = content['result']
@@ -136,7 +137,7 @@ class StalkerAgent(Agent):
                             user_by_theme[i] = []
 
                         user_by_theme[i] += list(map(int, content.keys()))
-                        user_by_theme[i] = unique((user_by_theme[i]))
+                        user_by_theme[i] = unique(user_by_theme[i])
 
                         print(user_by_theme)
                         for guid in user_by_theme[i]:
