@@ -5,47 +5,35 @@ import random
 import requests
 import auxiliar_methods as am
 
+mins = 90
 
 # agent code
 class SpyAgent(Agent):
-    def __init__(self, jid, password, guid, name):
+    def __init__(self, jid, password, guid, nam):
         super().__init__(jid, password)
         self.guid = guid
-        self.agName = name
+        self.agName = nam
         self.users_information = {}  # dictionary k = guid, v = (theme, selection, num messages sent)
         self.friends = []  # array containing the guid of the agent friends
+        self.initial_friends = []
 
     async def setup(self):
-        beh = self.SpyUsers(period=900)  # every 15 minutes
+        beh = self.SpyUsers(period=mins)  # every 15 minutes
         self.add_behaviour(beh)
         print('agent ready')
 
     class SpyUsers(PeriodicBehaviour):
         async def on_start(self):  # get_agent_friends(), select_users()
-            print('first i\'m going to get my friends')
-            res = requests.get('http://localhost/services/api/rest/json/?',
-                               params={'method': 'users.get_agent_friends',
-                                       'agentGUID': spy.guid}
-                               )
-            if res:
-                print('friends response received')
-                content = res.json()
-                if content['status'] == 0:
-                    print('friends status good')
-                    content = content['result']
-                    for k in content.keys():
-                        spy.friends += [int(content[k])]
-                    print('friends added')
-                    initial_friends = spy.friends
-                else:
-                    print('status incorrect')
-                    print(content)
-            else:
-                print('res failed')
-                print(res.json())
+            print('Hello i\'m ' + spy.agName)
+
+            spy.friends += am.get_friends(spy.guid)
+            print('friends added')
+            spy.initial_friends = spy.friends
 
             print('i\'m now getting users information')
-            for i in random.shuffle([0, 1, 2, 3, 4, 5]):
+            indexes = [0, 1, 2, 3, 4]
+            random.shuffle(indexes)
+            for i in indexes:
                 res = requests.get('http://localhost/services/api/rest/json/?',
                                    params={'method': 'users.select_users',
                                            'theme': i,
@@ -60,9 +48,10 @@ class SpyAgent(Agent):
 
                         for k in content.keys():
                             if int(k) not in spy.friends:  # if it isn't a friend
-                                spy.users_information[int(k)] = (
-                                    i, content[k], 0)  # save the user to be contacted later
-                        print('users to be contacted and users indexed by theme correctly created')
+                                tups = spy.users_information.get(int(k), [])
+                                spy.users_information[int(k)] = tups + [(
+                                    i, content[k], 0)]  # save the user to be contacted later
+                        print('users to be contacted and users indexed by theme correctly created with theme ' + str(i))
                     else:
                         print('status ' + str(i) + ' incorrect')
                         print(content)
@@ -71,22 +60,11 @@ class SpyAgent(Agent):
                     print(res.json())
             print('start behaviour finished')
 
-        async def run(self):  # send_message()
-            print('before starting sending messages, i\'m going to update my friendlist')
-            res = requests.get('http://localhost/services/api/rest/json/?',
-                               params={'method': 'users.get_agent_friends',
-                                       'agentGUID': spy.guid}
-                               )
-            if res:
-                print('friends response received')
-                content = res.json()
-                if content['status'] == 0:
-                    print('friends status good')
-                    content = content['result']
-                    for k in content.keys():
-                        spy.friends += [int(content[k])]
-                        spy.friends = am.unique(spy.friends)
-                    print('friendlist updated')
+        async def run(self):  # get_friends -> send_message()
+            print('before starting sending messages')
+            spy.friends += am.get_friends(spy.guid)
+            spy.friends = am.unique(spy.friends)
+            print('friendlist updated')
 
             print('preparing to send a lot of messages')
             for usr in spy.users_information.keys():
@@ -98,26 +76,40 @@ class SpyAgent(Agent):
                     print('this user is not my friend, so let\'s go')
                     sender = requests.post('http://localhost/services/api/rest/json/?',
                                            params={'method': 'users.send_message',
-                                                   'agentGUID': spy.agName,
+                                                   'agentGUID': spy.guid,
                                                    'receiverGUID': usr,
                                                    'subject': sub,
                                                    'content': con})
                     if sender:
-                        print('message sent with exit')
+                        print('message sent with exit with status: ' + str(sender.json()))
                     else:
                         print('message sent failed')
                         print(sender.json())
 
                     if info[-1] == 3:
                         print('last contact with ' + str(usr) + ' removing him from the contact list')
-                        spy.users_information.pop(usr)
+                        spy.users_information.pop(usr, -1)
                 else:
                     print('user ' + str(usr) + ' already is my friend, so my job with him is done.' +
-                          ' Removing him from the contact list')
-                    spy.users_information.pop(usr)
+                          ' Removing him from the contact list. i\'ve sent him' +
+                          str(spy.users_information[usr][-1] - 1)
+                          + ' messages')
+                    spy.users_information.pop(usr, -1)
+            if not spy.users_information:
+                self.kill()
 
-        async def at_end(self):  # report_info()
-            return
+        async def on_end(self):  # report_info()
+            print('before finishing my behaviour, i\'m going to check my friends')
+            spy.friends += am.get_friends(spy.guid)
+            spy.friends = am.unique(spy.friends)
+            print('friendlist updated')
+            print('Reporting stats...')
+            print('At the beginning of my duty, i had: ' + str(len(spy.initial_friends)) + ' friends')
+            print('Now, at the end, i have: ' + str(len(spy.friends)) + 'friends')
+            if len(spy.friends) > len(spy.initial_friends):
+                new_friends = list(set(spy.friends) - set(spy.initial_friends))
+                print('This means that users with guids: ' + str(new_friends) + 'have added me because of my messages')
+            await self.agent.stop()
 
 
 # main

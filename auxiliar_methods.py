@@ -1,5 +1,6 @@
 import random
 import message_content as mc
+import requests
 
 
 def check_conversation(tup_list):
@@ -16,7 +17,7 @@ def check_conversation(tup_list):
         if 0 < tup[-1] < 3:
             return tup
 
-    tup_index = random.randint(0, len(tup_list -1))
+    tup_index = random.randint(0, len(tup_list)-1)
     return tup_list[tup_index]
 
 
@@ -30,8 +31,7 @@ def head_body_selector(info, spyname):
         sub = "Hola, soy " + spyname
         t = mc.themes[info[0]]
         s = info[1]
-        con = "He visto en tu perfil que a ti tambien te gusta " + mc.predef_msg[t,s]
-        info = (info[0], info[1], info[-1] + 1)
+        con = "He visto en tu perfil que a ti tambien te gusta " + mc.predef_msg[t, s]
 
     if info[-1] == 1:
         print('second time contacting this dude')
@@ -39,14 +39,14 @@ def head_body_selector(info, spyname):
         s = info[1]
         con = "Se te ha olvidado enviarme la solicitud de amistad. Podemos ser muy buenos amigos y hablar sobre " + \
               s
-        info = (info[0], info[1], info[-1] + 1)
 
     if info[-1] == 2:
         print('last time contacting this dude')
         sub = "¿No quieres ser mi amigo?"
         con = "¿Por qué no quieres ser mi amigo? No me has enviado una petición de amistad," \
               " pensaba que teniamos cosas en común..."
-        info = (info[0], info[1], info[-1] + 1)
+
+    info = (info[0], info[1], info[-1] + 1)
 
     return sub, con, info
 
@@ -60,3 +60,29 @@ def unique(list1):
         if x not in unique_list:
             unique_list.append(x)
     return unique_list
+
+
+def get_friends(spy_id):
+    print('i\'m going to update my friendlist')
+    friends = []
+    res = requests.get('http://localhost/services/api/rest/json/?',
+                       params={'method': 'users.get_agent_friends',
+                               'agentGUID': spy_id}
+                       )
+    if res:
+        print('friends response received')
+        content = res.json()
+        if content['status'] == 0:
+            print('friends status good')
+            content = content['result']
+            for k in content.keys():
+                friends += [int(content[k])]
+        else:
+            print('status incorrect')
+            friends = []
+            print(content)
+    else:
+        print('res failed')
+        print(res.json())
+
+    return friends
