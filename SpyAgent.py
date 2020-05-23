@@ -5,7 +5,7 @@ import random
 import requests
 import auxiliar_methods as am
 
-mins = 90
+mins = 30
 
 # agent code
 class SpyAgent(Agent):
@@ -69,8 +69,10 @@ class SpyAgent(Agent):
             print('preparing to send a lot of messages')
             for usr in spy.users_information.keys():
                 info = spy.users_information[usr]
+                print(info)
                 conver = am.check_conversation(info)
-                sub, con, info = am.head_body_selector(conver, spy.agName)
+                sub, con, new_info = am.head_body_selector(conver, spy.agName)
+                spy.users_information[usr] = am.update_dict_value(info, new_info)
                 print('user selected, about to send him a message')
                 if usr not in spy.friends:
                     print('this user is not my friend, so let\'s go')

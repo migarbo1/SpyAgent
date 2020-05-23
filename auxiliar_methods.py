@@ -17,12 +17,11 @@ def check_conversation(tup_list):
         if 0 < tup[-1] < 3:
             return tup
 
-    tup_index = random.randint(0, len(tup_list)-1)
+    tup_index = random.randint(0, len(tup_list) - 1)
     return tup_list[tup_index]
 
 
 def head_body_selector(info, spyname):
-
     sub = " "
     con = " "
 
@@ -86,3 +85,14 @@ def get_friends(spy_id):
         print(res.json())
 
     return friends
+
+
+def update_dict_value(array, to_add):
+    to_remove = (to_add[0], to_add[1], to_add[-1]-1)
+    aux = []
+    for item in array:
+        if item != to_remove:
+            aux += [item]
+        else:
+            aux += [to_add]
+    return aux
