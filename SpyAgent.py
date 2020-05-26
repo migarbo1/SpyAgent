@@ -41,7 +41,9 @@ class SpyAgent(Agent):
                                    )
                 if res:
                     print('users information response received')
+                    print(res.text)
                     content = res.json()
+
                     if content['status'] == 0:
                         print('users information status good')
                         content = content['result']
@@ -60,7 +62,7 @@ class SpyAgent(Agent):
                     print(res.json())
             print('start behaviour finished')
 
-        async def run(self):  # get_friends -> send_message()
+        async def run(self):  # get_friends -> send_message() -> send_friend_request()
             print('before starting sending messages')
             spy.friends += am.get_friends(spy.guid)
             spy.friends = am.unique(spy.friends)
@@ -84,6 +86,20 @@ class SpyAgent(Agent):
                                                    'content': con})
                     if sender:
                         print('message sent with exit with status: ' + str(sender.json()))
+                    else:
+                        print('message sent failed')
+                        print(sender.json())
+
+                    print('before sending the message, i\'m going to send a friend request')
+                    sender = requests.post('http://localhost/services/api/rest/json/?',
+                                           params={'method': 'users.send_Friend_Request',
+                                                   'agentGUID': spy.guid,
+                                                   'receiverGUID': usr})
+                    if sender:
+                        print('message sent with exit with status: ' + str(sender.json()))
+                        content = sender.json()
+                        if content['status'] == -1:
+                            print('I\'ve already sent him a friend request and he hasn\'t answered yet')
                     else:
                         print('message sent failed')
                         print(sender.json())
