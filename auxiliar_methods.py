@@ -36,13 +36,13 @@ def head_body_selector(info, spyname):
         print('second time contacting this dude')
         sub = "Hola otra vez"
         s = info[1]
-        con = "Se te ha olvidado enviarme la solicitud de amistad. Podemos ser muy buenos amigos y hablar sobre " + \
+        con = "No has aceptado mi solicitud de amistad :(  Podemos ser muy buenos amigos y hablar sobre " + \
               s
 
     if info[-1] == 2:
         print('last time contacting this dude')
         sub = "¿No quieres ser mi amigo?"
-        con = "¿Por qué no quieres ser mi amigo? No me has enviado una petición de amistad," \
+        con = "¿Por qué no quieres ser mi amigo? " \
               " pensaba que teniamos cosas en común..."
 
     info = (info[0], info[1], info[-1] + 1)

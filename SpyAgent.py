@@ -106,7 +106,6 @@ class SpyAgent(Agent):
 
                     if info[-1] == 3:
                         print('last contact with ' + str(usr) + ' removing him from the contact list')
-                        spy.users_information.pop(usr, -1)
                 else:
                     print('user ' + str(usr) + ' already is my friend, so my job with him is done.' +
                           ' Removing him from the contact list. i\'ve sent him' +
@@ -132,8 +131,6 @@ class SpyAgent(Agent):
 
 # main
 if __name__ == "__main__":
-    user_com = {}
-    user_by_theme = {}
     spy = SpyAgent("agente1@localhost", "agente1", 1421, "Manolo")
     spy.start()
 
