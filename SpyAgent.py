@@ -5,7 +5,7 @@ import random
 import requests
 import auxiliar_methods as am
 
-mins = 30
+mins = 60
 
 # agent code
 class SpyAgent(Agent):
@@ -29,7 +29,6 @@ class SpyAgent(Agent):
             spy.friends += am.get_friends(spy.guid)
             print('friends added')
             spy.initial_friends = spy.friends
-
             print('i\'m now getting users information')
             indexes = [0, 1, 2, 3, 4]
             random.shuffle(indexes)
@@ -69,7 +68,8 @@ class SpyAgent(Agent):
             print('friendlist updated')
 
             print('preparing to send a lot of messages')
-            for usr in spy.users_information.keys():
+            users = spy.users_information.keys()
+            for usr in users:
                 info = spy.users_information[usr]
                 print(info)
                 conver = am.check_conversation(info)
@@ -108,9 +108,9 @@ class SpyAgent(Agent):
                         print('last contact with ' + str(usr) + ' removing him from the contact list')
                 else:
                     print('user ' + str(usr) + ' already is my friend, so my job with him is done.' +
-                          ' Removing him from the contact list. i\'ve sent him' +
-                          str(spy.users_information[usr][-1] - 1)
-                          + ' messages')
+                          ' Removing him from the contact list. i\'ve sent him ' +
+                          str(conver[-1])
+                          + ' messages about ' + conver[1])
                     spy.users_information.pop(usr, -1)
             if not spy.users_information:
                 self.kill()
@@ -119,10 +119,11 @@ class SpyAgent(Agent):
             print('before finishing my behaviour, i\'m going to check my friends')
             spy.friends += am.get_friends(spy.guid)
             spy.friends = am.unique(spy.friends)
+            spy.initial_friends = am.unique(spy.initial_friends)
             print('friendlist updated')
             print('Reporting stats...')
             print('At the beginning of my duty, i had: ' + str(len(spy.initial_friends)) + ' friends')
-            print('Now, at the end, i have: ' + str(len(spy.friends)) + 'friends')
+            print('Now, at the end, i have: ' + str(len(spy.friends)) + ' friends')
             if len(spy.friends) > len(spy.initial_friends):
                 new_friends = list(set(spy.friends) - set(spy.initial_friends))
                 print('This means that users with guids: ' + str(new_friends) + 'have added me because of my messages')
