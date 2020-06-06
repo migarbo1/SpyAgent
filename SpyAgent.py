@@ -5,7 +5,7 @@ import random
 import requests
 import auxiliar_methods as am
 
-mins = 60
+mins = 30 #set it to 5 minutes
 
 # agent code
 class SpyAgent(Agent):
@@ -13,9 +13,11 @@ class SpyAgent(Agent):
         super().__init__(jid, password)
         self.guid = guid
         self.agName = nam
-        self.users_information = {}  # dictionary k = guid, v = (theme, selection, num messages sent)
+        self.users_information = {}  # dictionary k = guid, v = [(theme, selection, num messages sent), ...]
         self.friends = []  # array containing the guid of the agent friends
         self.initial_friends = []
+        self.profile_changes = 0
+        self.change = False
 
     async def setup(self):
         beh = self.SpyUsers(period=mins)  # every 15 minutes
@@ -90,7 +92,7 @@ class SpyAgent(Agent):
                         print('message sent failed')
                         print(sender.json())
 
-                    print('before sending the message, i\'m going to send a friend request')
+                    print('after sending the message, i\'m going to send a friend request')
                     sender = requests.post('http://localhost/services/api/rest/json/?',
                                            params={'method': 'users.send_Friend_Request',
                                                    'agentGUID': spy.guid,
@@ -104,18 +106,34 @@ class SpyAgent(Agent):
                         print('message sent failed')
                         print(sender.json())
 
-                    if info[-1] == 3:
-                        print('last contact with ' + str(usr) + ' removing him from the contact list')
+                    if new_info[-1] > 2:
+                        print('last contact with ' + str(usr) + ' about ' + new_info[1])
+                        spy.change = True
                 else:
                     print('user ' + str(usr) + ' already is my friend, so my job with him is done.' +
                           ' Removing him from the contact list. i\'ve sent him ' +
                           str(conver[-1])
                           + ' messages about ' + conver[1])
                     spy.users_information.pop(usr, -1)
+
+            if spy.change:
+                spy.profile_changes += 1
+                if spy.profile_changes <= 1:
+                    agent_name_pool.remove(spy.agName)
+                    agent_guid_pool.remove(spy.guid)
+                    ind = random.randint(0, len(agent_guid_pool))
+                    spy.agName = agent_name_pool[ind]
+                    spy.guid = agent_guid_pool[ind]
+                    spy.change = False
+                    print("Now i\'m " + spy.agName)
+                else:
+                    self.kill()
+
             if not spy.users_information:
                 self.kill()
 
         async def on_end(self):  # report_info()
+            time.sleep(300) # simulates the 5-minutes waiting time. Otherwise the last message hasn't wait time.
             print('before finishing my behaviour, i\'m going to check my friends')
             spy.friends += am.get_friends(spy.guid)
             spy.friends = am.unique(spy.friends)
@@ -132,7 +150,11 @@ class SpyAgent(Agent):
 
 # main
 if __name__ == "__main__":
-    spy = SpyAgent("agente1@localhost", "agente1", 1421, "Manolo")
+    agent_guid_pool = [1421, 1595]
+    agent_name_pool = ["Manolo", "Pedrito"]
+    index = random.randint(0, len(agent_guid_pool)-1)
+    change = False
+    spy = SpyAgent("agente1@localhost", "agente1", agent_guid_pool[index], agent_name_pool[index])
     spy.start()
 
     while True:
