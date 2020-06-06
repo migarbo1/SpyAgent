@@ -101,12 +101,11 @@ def update_dict_value(array, to_add):
     return aux
 
 
-def plot_results(user_dict, users_added):
+def plot_results(users_removed, user_dict, users_added, user_by_agent_identity):
     # porcentaje total de éxito
     pieLabels = 'Accepted', 'Denied'
     pos = len(users_added)
-    neg = len(user_dict.keys()) - pos
-    print(str(pos) + "   " + str(neg))
+    neg = len(user_dict.keys())
     data = [pos, neg]
     fObject, aObject = plt.subplots()
     aObject.pie(data,
@@ -114,7 +113,7 @@ def plot_results(user_dict, users_added):
                 autopct='%1.2f',
                 startangle=90)
     aObject.axis('equal')
-    plt.show()
+    plt.savefig('piechart.png')
 
     # gráfico de éxito por temas
     theme_histogram_labels = ["película", "deporte", "mascota", "música", "videojuego"]
@@ -138,7 +137,7 @@ def plot_results(user_dict, users_added):
     plt.bar(theme_histogram_labels,theme_data, label='new friends per theme')
     plt.xlabel('Themes')
     plt.ylabel('Number of new friends')
-    plt.show()
+    plt.savefig('theme_histogram.png')
 
     # gráfico de éxito por número de mensajes recibidos
     nmes_dict = {}
@@ -162,8 +161,24 @@ def plot_results(user_dict, users_added):
     plt.show()
 
     # gráfico de éxito por perfil de agente
+    claves = list(user_by_agent_identity.keys())
+    for i in range(0, len(claves)-1):
+        dif = list(set(user_by_agent_identity[claves[i]]) - set(user_by_agent_identity[claves[i+1]]))
+        user_by_agent_identity[claves[i]] = dif
+    identity_data = []
 
-    # gráfico de éxito por sexo del usuario (pateo xD)
+    for k in user_by_agent_identity.keys():
+        for u in user_by_agent_identity[k]:
+            if u not in users_added:
+                user_by_agent_identity[k].remove(u)
+
+    for n in claves:
+        identity_data += [len(user_by_agent_identity[n])]
+
+    plt.bar(claves, identity_data, label='firends added by each identity')
+    plt.xlabel('Name of the spy user')
+    plt.ylabel('Number of new friends')
+    plt.savefig('identity_histogram.png')
 
 
 def any_one_or_two(ar):
