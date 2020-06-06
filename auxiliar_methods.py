@@ -104,7 +104,7 @@ def update_dict_value(array, to_add):
 def plot_results(users_removed, user_dict, users_added, user_by_agent_identity):
     # porcentaje total de éxito
     pieLabels = 'Accepted', 'Denied'
-    pos = len(users_added)
+    pos = len(users_removed)
     neg = len(user_dict.keys())
     data = [pos, neg]
     fObject, aObject = plt.subplots()
@@ -113,13 +113,13 @@ def plot_results(users_removed, user_dict, users_added, user_by_agent_identity):
                 autopct='%1.2f',
                 startangle=90)
     aObject.axis('equal')
-    plt.savefig('piechart.png')
+    aObject.savefig('piechart.png')
 
     # gráfico de éxito por temas
     theme_histogram_labels = ["película", "deporte", "mascota", "música", "videojuego"]
     theme_dict = {0: [], 1: [], 2: [], 3: [], 4: []}
-    for user in users_added:
-        info = user_dict[user]
+    for user in users_removed:
+        info = users_removed[user]
         # if 0 -> nothing. if 1 or 2 -> save it. if 3 -> save it only if there aren't any 1 or 2
         for i in info:
             nmes = i[-1]
@@ -134,15 +134,16 @@ def plot_results(users_removed, user_dict, users_added, user_by_agent_identity):
     for t in theme_dict.keys():
         theme_data += [len(theme_dict[t])]
 
-    plt.bar(theme_histogram_labels,theme_data, label='new friends per theme')
-    plt.xlabel('Themes')
-    plt.ylabel('Number of new friends')
-    plt.savefig('theme_histogram.png')
+    fObject, bObject = plt.subplots()
+    bObject.bar(theme_histogram_labels,theme_data, label='new friends per theme')
+    bObject.xlabel('Themes')
+    bObject.ylabel('Number of new friends')
+    bObject.savefig('theme_histogram.png')
 
     # gráfico de éxito por número de mensajes recibidos
     nmes_dict = {}
-    for user in users_added:
-        info = user_dict[user]
+    for user in users_removed:
+        info = users_removed[user]
         acum = 0
         for i in info:
             nmes = i[-1]
@@ -155,10 +156,11 @@ def plot_results(users_removed, user_dict, users_added, user_by_agent_identity):
     for n in nmes_dict.keys():
         nmes_data += [len(nmes_dict[n])]
 
-    plt.bar(nmes_dict.keys(), nmes_data, label='new friends per message sent')
-    plt.xlabel('Number of messages')
-    plt.ylabel('Number of new friends')
-    plt.show()
+    fObject, cObject = plt.subplots()
+    cObject.bar(nmes_dict.keys(), nmes_data, label='new friends per message sent')
+    cObject.xlabel('Number of messages')
+    cObject.ylabel('Number of new friends')
+    cObject.savefig('message_number_histogram.png')
 
     # gráfico de éxito por perfil de agente
     claves = list(user_by_agent_identity.keys())
@@ -175,10 +177,11 @@ def plot_results(users_removed, user_dict, users_added, user_by_agent_identity):
     for n in claves:
         identity_data += [len(user_by_agent_identity[n])]
 
-    plt.bar(claves, identity_data, label='firends added by each identity')
-    plt.xlabel('Name of the spy user')
-    plt.ylabel('Number of new friends')
-    plt.savefig('identity_histogram.png')
+    fObject, dObject = plt.subplots()
+    dObject.bar(claves, identity_data, label='firends added by each identity')
+    dObject.xlabel('Name of the spy user')
+    dObject.ylabel('Number of new friends')
+    dObject.savefig('identity_histogram.png')
 
 
 def any_one_or_two(ar):

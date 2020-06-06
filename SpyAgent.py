@@ -154,7 +154,7 @@ class SpyAgent(Agent):
             if len(spy.friends) > len(spy.initial_friends):
                 new_friends = list(set(spy.friends) - set(spy.initial_friends))
                 print('This means that users with guids: ' + str(new_friends) + 'have added me because of my messages')
-                am.plot_results(users_removed, spy.users_information, new_friends, spy.users_by_profile)
+                am.plot_results(spy.users_removed, spy.users_information, new_friends, spy.users_by_profile)
             await self.agent.stop()
 
 
