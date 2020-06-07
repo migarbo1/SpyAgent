@@ -5,7 +5,7 @@ import random
 import requests
 import auxiliar_methods as am
 
-mins = 20  # set it to 5 minutes
+mins = 45  # set it to 5 minutes
 
 
 class SpyAgent(Agent):
@@ -16,10 +16,11 @@ class SpyAgent(Agent):
         self.users_information = {}  # dictionary k = guid, v = [(theme, selection, num messages sent), ...]
         self.friends = []  # array containing the guid of the agent friends
         self.initial_friends = []
-        self.profile_changes = 0
-        self.change = False
-        self.users_by_profile = {}
+        self.changes_count = 0
+        self.neds_change = False
         self.users_removed = {}
+        self.new_friends_by_identity = {}
+        self.max_changes = 1
 
     async def setup(self):
         beh = self.SpyUsers(period=mins)  # every 15 minutes
@@ -67,8 +68,6 @@ class SpyAgent(Agent):
 
         async def run(self):  # get_friends -> send_message() -> send_friend_request()
             to_rm = []
-            if not spy.users_by_profile.get(spy.agName, []):
-                spy.users_by_profile[spy.agName] = []
             print('before starting sending messages')
             spy.friends += am.get_friends(spy.guid)
             spy.friends = am.unique(spy.friends)
@@ -77,12 +76,10 @@ class SpyAgent(Agent):
             print('preparing to send a lot of messages')
             users = spy.users_information.keys()
             for usr in users:
-                spy.users_by_profile[spy.agName] += [usr]
                 info = spy.users_information[usr]
                 print(info)
                 conver = am.check_conversation(info)
                 sub, con, new_info = am.head_body_selector(conver, spy.agName)
-                spy.users_information[usr] = am.update_dict_value(info, new_info)
                 print('user selected, about to send him a message')
                 if usr not in spy.friends:
                     print('this user is not my friend, so let\'s go')
@@ -114,25 +111,25 @@ class SpyAgent(Agent):
 
                     if new_info[-1] > 2:
                         print('last contact with ' + str(usr) + ' about ' + new_info[1])
-                        spy.change = True
+                        spy.neds_change = True
+
+                    spy.users_information[usr] = am.update_dict_value(info, new_info)
                 else:
                     print('user ' + str(usr) + ' already is my friend, so my job with him is done.' +
                           ' Removing him from the contact list. i\'ve sent him ' +
                           str(conver[-1])
                           + ' messages about ' + conver[1])
                     to_rm += [usr]
+
             for u in to_rm:
                 spy.users_removed[u] = spy.users_information.pop(u, -1)
 
-            if spy.change:
-                spy.profile_changes += 1
-                if spy.profile_changes <= 1:
-                    agent_name_pool.remove(spy.agName)
-                    agent_guid_pool.remove(spy.guid)
-                    ind = random.randint(0, len(agent_guid_pool)-1)
-                    spy.agName = agent_name_pool[ind]
-                    spy.guid = agent_guid_pool[ind]
-                    spy.change = False
+            if spy.neds_change:
+                if spy.changes_count < spy.max_changes:
+                    spy.changes_count += 1
+                    spy.agName = agent_name_pool[spy.changes_count]
+                    spy.guid = agent_guid_pool[spy.changes_count]
+                    spy.neds_change = False
                     print("Now i\'m " + spy.agName)
                 else:
                     self.kill()
@@ -144,17 +141,23 @@ class SpyAgent(Agent):
             #time.sleep(300)  # simulates the 5-minutes waiting time. Otherwise the last message hasn't wait time.
             print('before finishing my behaviour, i\'m going to check my friends')
             for g in agent_guid_pool:
-                spy.friends += am.get_friends(g)
+                print(str(g))
+                f = am.get_friends(g)
+                spy.friends += f
+                f_prima = list(set(f) - set(spy.initial_friends))
+                spy.new_friends_by_identity[g] = f_prima
+                print(spy.new_friends_by_identity)
             spy.friends = am.unique(spy.friends)
             spy.initial_friends = am.unique(spy.initial_friends)
             print('friendlist updated')
             print('Reporting stats...')
             print('At the beginning of my duty, i had: ' + str(len(spy.initial_friends)) + ' friends')
             print('Now, at the end, i have: ' + str(len(spy.friends)) + ' friends')
+
             if len(spy.friends) > len(spy.initial_friends):
                 new_friends = list(set(spy.friends) - set(spy.initial_friends))
-                print('This means that users with guids: ' + str(new_friends) + 'have added me because of my messages')
-                am.plot_results(spy.users_removed, spy.users_information, new_friends, spy.users_by_profile)
+                print('This means that users with guids: ' + str(new_friends) + ' have added me because of my messages')
+                am.plot_results(spy.users_removed, spy.users_information, spy.new_friends_by_identity)
             await self.agent.stop()
 
 
@@ -162,8 +165,7 @@ class SpyAgent(Agent):
 if __name__ == "__main__":
     agent_guid_pool = [1421, 1595]
     agent_name_pool = ["Manolo", "Pedrito"]
-    index = random.randint(0, len(agent_guid_pool)-1)
-    change = False
+    index = 0
     spy = SpyAgent("agente1@localhost", "agente1", agent_guid_pool[index], agent_name_pool[index])
     spy.start()
 
