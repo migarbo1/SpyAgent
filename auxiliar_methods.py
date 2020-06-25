@@ -173,7 +173,7 @@ def plot_results(users_removed, user_dict, user_by_agent_identity):
         identity_labels += [diction[n]]
         identity_data += [len(user_by_agent_identity[n])]
 
-    plt.bar(identity_labels, identity_data, label='firends added by each identity')
+    plt.bar(identity_labels, identity_data, label='friends added by each identity')
     plt.xlabel('Name of the spy user')
     plt.ylabel('Number of new friends')
     f4.savefig('identity_histogram.png')

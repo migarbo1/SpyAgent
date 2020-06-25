@@ -138,7 +138,7 @@ class SpyAgent(Agent):
                 self.kill()
 
         async def on_end(self):  # report_info()
-            #time.sleep(300)  # simulates the 5-minutes waiting time. Otherwise the last message hasn't wait time.
+            # time.sleep(300)  # simulates the 5-minutes waiting time. Otherwise the last message hasn't wait time.
             print('before finishing my behaviour, i\'m going to check my friends')
             for g in agent_guid_pool:
                 print(str(g))
