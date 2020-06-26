@@ -21,6 +21,7 @@ class SpyAgent(Agent):
         self.users_removed = {}
         self.new_friends_by_identity = {}
         self.max_changes = 1
+        self.total_users = 0
 
     async def setup(self):
         beh = self.SpyUsers(period=mins)  # every 15 minutes
@@ -53,7 +54,7 @@ class SpyAgent(Agent):
                         content = content['result']
 
                         for k in content.keys():
-                            if int(k) not in spy.friends:  # if it isn't a friend
+                            if int(k) not in spy.friends or int(k) != spy.guid:  # if it isn't a friend
                                 tups = spy.users_information.get(int(k), [])
                                 spy.users_information[int(k)] = tups + [(
                                     i, content[k], 0)]  # save the user to be contacted later
@@ -64,6 +65,7 @@ class SpyAgent(Agent):
                 else:
                     print('res ' + str(i) + ' failed')
                     print(res.json())
+            spy.total_users = len(spy.users_information.keys())
             print('start behaviour finished')
 
         async def run(self):  # get_friends -> send_message() -> send_friend_request()
@@ -79,9 +81,9 @@ class SpyAgent(Agent):
                 info = spy.users_information[usr]
                 print(info)
                 conver = am.check_conversation(info)
-                sub, con, new_info = am.head_body_selector(conver, spy.agName)
+                sub, con, new_info = am.head_body_selector(conver, info[-1], spy.agName)
                 print('user selected, about to send him a message')
-                if usr not in spy.friends:
+                if usr not in spy.friends or spy.users_removed.get(usr, []) == []:
                     print('this user is not my friend, so let\'s go')
                     sender = requests.post('http://localhost/services/api/rest/json/?',
                                            params={'method': 'users.send_message',
@@ -157,7 +159,7 @@ class SpyAgent(Agent):
             if len(spy.friends) > len(spy.initial_friends):
                 new_friends = list(set(spy.friends) - set(spy.initial_friends))
                 print('This means that users with guids: ' + str(new_friends) + ' have added me because of my messages')
-                am.plot_results(spy.users_removed, spy.users_information, spy.new_friends_by_identity)
+                am.plot_results(spy.users_removed, spy.total_users, spy.new_friends_by_identity)
             await self.agent.stop()
 
 

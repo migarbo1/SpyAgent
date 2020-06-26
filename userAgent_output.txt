@@ -1,0 +1,137 @@
+agent ready
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(2305) no retorna un valor'}
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(2315) no retorna un valor'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2305,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2315,15) tiene un error de análisis'}
+agent ready
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(2307) no retorna un valor'}
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(2313) no retorna un valor'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2307,70) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2313,70) tiene un error de análisis'}
+agent ready
+agent ready
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(2297) no retorna un valor'}
+i'm going to update my friendlist
+friends response received
+friends status good
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2297,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2309,90) tiene un error de análisis'}
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(2303) no retorna un valor'}
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(2311) no retorna un valor'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2303,45) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2311,45) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2305,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2315,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2307,70) tiene un error de análisis'}
+perform response received
+{'status': 0, 'result': True}
+perform status good
+True
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2297,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2309,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2303,45) tiene un error de análisis'}
+perform response received
+{'status': 0, 'result': True}
+perform status good
+True
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2305,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2315,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2307,70) tiene un error de análisis'}
+perform response received
+{'status': 0, 'result': True}
+perform status good
+True
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2297,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2309,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2303,45) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2311,45) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2305,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2315,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2307,70) tiene un error de análisis'}
+perform response received
+{'status': 0, 'result': True}
+perform status good
+True
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2297,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2309,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2303,45) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2311,45) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2305,15) tiene un error de análisis'}
+perform response received
+{'status': 0, 'result': True}
+perform status good
+True
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2307,70) tiene un error de análisis'}
+perform response received
+{'status': 0, 'result': True}
+perform status good
+True
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2297,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2309,90) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2303,45) tiene un error de análisis'}
+perform response received
+{'status': 0, 'result': True}
+perform status good
+True
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2305,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2315,15) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2307,70) tiene un error de análisis'}
+perform response received
+{'status': -1, 'message': 'perform_user_simulator(2313,70) tiene un error de análisis'}

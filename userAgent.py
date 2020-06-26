@@ -17,7 +17,7 @@ class UserSimulation(Agent):
 
     class UserBehaviour(PeriodicBehaviour, Agent):
         def __init__(self, agent):
-            super().__init__(period = 30)
+            super().__init__(period=70)
             self.agent = agent
 
         async def on_start(self):
@@ -42,24 +42,20 @@ class UserSimulation(Agent):
                         content = content['result']
                         print(content)
             self.agent.cont += 1
-            if self.agent.cont == 3:
+            if self.agent.cont == 5:
                 self.agent.kill()
 
-        async def on_end(self):
-            print("patata")
-
     async def setup(self):
-        beh = self.UserBehaviour(self)  # every 15 minutes
+        beh = self.UserBehaviour(self)
         self.add_behaviour(beh)
         print('agent ready')
 
 
 if __name__ == "__main__":
-
-    fu1 = UserSimulation("fakeuser1@localhost", "fakeUser1", 24, [1752])
-    fu2 = UserSimulation("fakeuser2@localhost", "fakeUser2", 49, [1750])
-    fu3 = UserSimulation("fakeuser3@localhost", "fakeUser3", 74, [1748])
-    fu4 = UserSimulation("fakeuser4@localhost", "fakeUser4", 100, [1601])
+    fu1 = UserSimulation("fakeuser1@localhost", "fakeUser1", 15, [2305, 2315]) # visente y andreu
+    fu2 = UserSimulation("fakeuser2@localhost", "fakeUser2", 45, [2303, 2311]) # pako y miguel
+    fu3 = UserSimulation("fakeuser3@localhost", "fakeUser3", 70, [2307, 2313]) # mario y aaron
+    fu4 = UserSimulation("fakeuser4@localhost", "fakeUser4", 90, [2297, 2309]) # pepe y zura
     fu1.start()
     fu2.start()
     fu3.start()

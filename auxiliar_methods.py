@@ -26,33 +26,31 @@ def check_conversation(tup_list):
     return nc[tup_index]
 
 
-def head_body_selector(info, spyname):
+def head_body_selector(info, nmes, spyname):
     sub = " "
     con = " "
 
-    if info[-1] == 0:
+    if nmes % 3 == 0:
         print('fist time contacting this dude')
         sub = "Hola, soy " + spyname
         t = mc.themes[info[0]]
         s = info[1]
         con = "He visto en tu perfil que a ti tambien te gusta " + mc.predef_msg[t, s]
 
-    if info[-1] == 1:
+    if nmes % 3 == 1:
         print('second time contacting this dude')
         sub = "Hola otra vez"
         s = info[1]
         con = "No has aceptado mi solicitud de amistad :(  Podemos ser muy buenos amigos y hablar sobre " + \
               s
 
-    if info[-1] == 2:
+    if nmes % 3 == 2:
         print('last time contacting this dude')
         sub = "¿No quieres ser mi amigo?"
         con = "¿Por qué no quieres ser mi amigo? " \
               " pensaba que teniamos cosas en común..."
 
-    info = (info[0], info[1], info[-1] + 1)
-
-    return sub, con, info
+    return sub, con
 
 
 def unique(list1):
@@ -89,6 +87,7 @@ def get_friends(spy_id):
         print('res failed')
         print(res.json())
 
+    print(friends)
     return friends
 
 
@@ -103,77 +102,57 @@ def update_dict_value(array, to_add):
     return aux
 
 
-def plot_results(users_removed, user_dict, user_by_agent_identity):
-    # porcentaje total de éxito
+def plot_results(users):
     pieLabels = 'Accepted', 'Denied'
-    pos = len(users_removed)
-    neg = len(user_dict.keys())
+    pos = 0
+    neg = 0
+    theme_histogram_labels = ["película", "deporte", "mascota", "música", "videojuego"]
+    theme_data = [0, 0, 0, 0, 0]
+    nmes_dict = {}
+    nmes_data = []
+    manolo = 0
+    pedrito = 0
+    for u in users:
+        if u.is_friend:
+            pos += 1
+            theme_data[u.last_theme] += 1
+            if nmes_dict.get(u.messages_received, -5) == -5:
+                nmes_dict[u.messages_received] = 1
+            else:
+                nmes_dict[u.messages_received] += 1
+            if u.contacted_by == "Manolo":
+                manolo += 1
+            else:
+                pedrito += 1
+        else:
+            neg += 1
+
+    for n in nmes_dict.keys():
+        nmes_data += [len(nmes_dict[n])]
+
     data = [pos, neg]
     f1 = plt.figure(1)
     plt.pie(data,
-                labels=pieLabels,
-                autopct='%1.2f',
-                startangle=90)
+            labels=pieLabels,
+            autopct='%1.2f',
+            startangle=90)
     plt.axis('equal')
-    plt.savefig('piechart.png')
+    f1.savefig('piechart.png')
 
-    # gráfico de éxito por temas
     f2 = plt.figure(2)
-    theme_histogram_labels = ["película", "deporte", "mascota", "música", "videojuego"]
-    theme_dict = {0: [], 1: [], 2: [], 3: [], 4: []}
-    for user in users_removed:
-        info = users_removed[user]
-        # if 0 -> nothing. if 1 or 2 -> save it. if 3 -> save it only if there aren't any 1 or 2
-        for i in info:
-            nmes = i[-1]
-            if nmes != 0:
-                if 1 <= nmes <= 2:
-                    theme_dict[i[0]] += [user]
-                    break
-                elif not any_one_or_two(info):
-                    theme_dict[i[0]] += [user]
-                    break
-    theme_data = []
-    for t in theme_dict.keys():
-        theme_data += [len(theme_dict[t])]
-
-    plt.bar(theme_histogram_labels,theme_data, label='new friends per theme')
+    plt.bar(theme_histogram_labels, theme_data, label='new friends per theme')
     plt.xlabel('Themes')
     plt.ylabel('Number of new friends')
     f2.savefig('theme_histogram.png')
 
-    # gráfico de éxito por número de mensajes recibidos
     f3 = plt.figure(3)
-    nmes_dict = {}
-    for user in users_removed:
-        info = users_removed[user]
-        acum = 0
-        for i in info:
-            nmes = i[-1]
-            acum += nmes
-        aux = nmes_dict.get(acum,0)
-        if aux == 0:
-            nmes_dict[acum] = []
-        nmes_dict[acum] += [user]
-    nmes_data = []
-    for n in nmes_dict.keys():
-        nmes_data += [len(nmes_dict[n])]
-
     plt.bar(nmes_dict.keys(), nmes_data, label='new friends per message sent')
     plt.xlabel('Number of messages')
     plt.ylabel('Number of new friends')
     f3.savefig('message_number_histogram.png')
 
-    # gráfico de éxito por perfil de agente
     f4 = plt.figure(4)
-    identity_data = []
-    identity_labels = []
-
-    for n in user_by_agent_identity.keys():
-        identity_labels += [diction[n]]
-        identity_data += [len(user_by_agent_identity[n])]
-
-    plt.bar(identity_labels, identity_data, label='friends added by each identity')
+    plt.bar(["Manolo", "Pedrito"], [manolo, pedrito], label='friends added by each identity')
     plt.xlabel('Name of the spy user')
     plt.ylabel('Number of new friends')
     f4.savefig('identity_histogram.png')
@@ -185,3 +164,11 @@ def any_one_or_two(ar):
         if 1 <= n <= 2:
             return True
     return False
+
+
+def get_user(array, guid):
+    for u in array:
+        if guid == u.guid:
+            return u
+
+    return -1

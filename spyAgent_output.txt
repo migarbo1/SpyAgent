@@ -1,0 +1,272 @@
+agent ready
+Hello i'm Manolo
+i'm going to update my friendlist
+friends response received
+friends status good
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(1595) no retorna un valor'}
+friends added
+i'm now getting users information
+users information response received
+{"status":0,"result":{"1595":"Electr\u00f3nica","2315":"Pop","2313":"Pop","2311":"Pop"}}
+users information status good
+users to be contacted and users indexed by theme correctly created with theme 3
+users information response received
+{"status":0,"result":{"2315":"Perro","2313":"Perro","2311":"Perro"}}
+users information status good
+users to be contacted and users indexed by theme correctly created with theme 2
+users information response received
+{"status":0,"result":{"1595":"Star Wars","2315":"Batman","2313":"Batman","2311":"Batman"}}
+users information status good
+users to be contacted and users indexed by theme correctly created with theme 0
+users information response received
+{"status":0,"result":{"1595":"Fortnite","2315":"Fortnite","2313":"Fortnite","2311":"Fortnite"}}
+users information status good
+users to be contacted and users indexed by theme correctly created with theme 4
+users information response received
+{"status":0,"result":{"2315":"F\u00fatbol","2313":"F\u00fatbol","2311":"F\u00fatbol"}}
+users information status good
+users to be contacted and users indexed by theme correctly created with theme 1
+start behaviour finished
+before starting sending messages
+i'm going to update my friendlist
+friends response received
+friends status good
+friendlist updated
+preparing to send a lot of messages
+[(3, 'Electrónica', 0), (0, 'Star Wars', 0), (4, 'Fortnite', 0)]
+fist time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2762}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1421,1595) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 0), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+fist time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2764}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 0), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+fist time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2766}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 0), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+fist time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2768}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+before starting sending messages
+i'm going to update my friendlist
+friends response received
+friends status good
+friendlist updated
+preparing to send a lot of messages
+[(3, 'Electrónica', 0), (0, 'Star Wars', 1), (4, 'Fortnite', 0)]
+second time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2770}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1421,1595) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 0), (4, 'Fortnite', 0), (1, 'Fútbol', 1)]
+second time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2772}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1421,2315) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 1), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+second time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2774}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1421,2313) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 1), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+second time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2776}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1421,2311) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+before starting sending messages
+i'm going to update my friendlist
+friends response received
+friends status good
+friendlist updated
+preparing to send a lot of messages
+[(3, 'Electrónica', 0), (0, 'Star Wars', 2), (4, 'Fortnite', 0)]
+last time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2778}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1421,1595) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+last contact with 1595 about Star Wars
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 0), (4, 'Fortnite', 0), (1, 'Fútbol', 2)]
+last time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2780}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+last contact with 2315 about Fútbol
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 2), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+last time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2782}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+last contact with 2313 about Batman
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 2), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+last time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2784}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+last contact with 2311 about Batman
+Now i'm Pedrito
+before starting sending messages
+i'm going to update my friendlist
+friends response received
+status incorrect
+{'status': -1, 'message': 'get_agent_friends(1595) no retorna un valor'}
+friendlist updated
+preparing to send a lot of messages
+[(3, 'Electrónica', 0), (0, 'Star Wars', 3), (4, 'Fortnite', 0)]
+fist time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2786}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1595,1595) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 0), (4, 'Fortnite', 0), (1, 'Fútbol', 3)]
+fist time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2787}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 3), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+fist time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2789}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 3), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+fist time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2791}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+before starting sending messages
+i'm going to update my friendlist
+friends response received
+friends status good
+friendlist updated
+preparing to send a lot of messages
+[(3, 'Electrónica', 1), (0, 'Star Wars', 3), (4, 'Fortnite', 0)]
+second time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2793}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1595,1595) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+[(3, 'Pop', 1), (2, 'Perro', 0), (0, 'Batman', 0), (4, 'Fortnite', 0), (1, 'Fútbol', 3)]
+second time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2794}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1595,2315) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 3), (4, 'Fortnite', 1), (1, 'Fútbol', 0)]
+second time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2796}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+[(3, 'Pop', 0), (2, 'Perro', 1), (0, 'Batman', 3), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+second time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2798}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+before starting sending messages
+i'm going to update my friendlist
+friends response received
+friends status good
+friendlist updated
+preparing to send a lot of messages
+[(3, 'Electrónica', 2), (0, 'Star Wars', 3), (4, 'Fortnite', 0)]
+last time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2800}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': -1, 'message': 'send_Friend_Request(1595,1595) tiene un error de análisis'}
+I've already sent him a friend request and he hasn't answered yet
+last contact with 1595 about Electrónica
+[(3, 'Pop', 2), (2, 'Perro', 0), (0, 'Batman', 0), (4, 'Fortnite', 0), (1, 'Fútbol', 3)]
+last time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2801}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+last contact with 2315 about Pop
+[(3, 'Pop', 0), (2, 'Perro', 0), (0, 'Batman', 3), (4, 'Fortnite', 2), (1, 'Fútbol', 0)]
+last time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2803}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+last contact with 2313 about Fortnite
+[(3, 'Pop', 0), (2, 'Perro', 2), (0, 'Batman', 3), (4, 'Fortnite', 0), (1, 'Fútbol', 0)]
+last time contacting this dude
+user selected, about to send him a message
+this user is not my friend, so let's go
+message sent with exit with status: {'status': 0, 'result': 2805}
+after sending the message, i'm going to send a friend request
+message sent with exit with status: {'status': 0, 'result': True}
+last contact with 2311 about Perro
+before finishing my behaviour, i'm going to check my friends
+1421
+i'm going to update my friendlist
+friends response received
+friends status good
+{1421: [2313, 2311]}
+1595
+i'm going to update my friendlist
+friends response received
+friends status good
+{1421: [2313, 2311], 1595: [2313]}
+friendlist updated
+Reporting stats...
+At the beginning of my duty, i had: 2 friends
+Now, at the end, i have: 4 friends
+This means that users with guids: [2313, 2311] have added me because of my messages
