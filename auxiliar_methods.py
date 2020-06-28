@@ -128,7 +128,7 @@ def plot_results(users):
             neg += 1
 
     for n in nmes_dict.keys():
-        nmes_data += [len(nmes_dict[n])]
+        nmes_data += [nmes_dict[n]]
 
     data = [pos, neg]
     f1 = plt.figure(1)

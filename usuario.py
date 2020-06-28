@@ -12,6 +12,6 @@ class Usuario:
         self.last_theme = -1
         self.contacted_by = ''
 
-    def now_is_friend(self):
-        self.is_friend = True
-        return self
+    def to_String(self):
+        return 'User with guid ' + str(self.guid) + ' is my friend? ' + str(self.is_friend) + ' messages sent ' + str(self.messages_received) + ' contacted by ' + str(self.contacted_by)
+

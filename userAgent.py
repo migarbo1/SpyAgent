@@ -17,7 +17,7 @@ class UserSimulation(Agent):
 
     class UserBehaviour(PeriodicBehaviour, Agent):
         def __init__(self, agent):
-            super().__init__(period=70)
+            super().__init__(period=60)
             self.agent = agent
 
         async def on_start(self):
@@ -42,7 +42,7 @@ class UserSimulation(Agent):
                         content = content['result']
                         print(content)
             self.agent.cont += 1
-            if self.agent.cont == 5:
+            if self.agent.cont == 100:
                 self.agent.kill()
 
     async def setup(self):
@@ -52,10 +52,10 @@ class UserSimulation(Agent):
 
 
 if __name__ == "__main__":
-    fu1 = UserSimulation("fakeuser1@localhost", "fakeUser1", 15, [2305, 2315]) # visente y andreu
-    fu2 = UserSimulation("fakeuser2@localhost", "fakeUser2", 45, [2303, 2311]) # pako y miguel
-    fu3 = UserSimulation("fakeuser3@localhost", "fakeUser3", 70, [2307, 2313]) # mario y aaron
-    fu4 = UserSimulation("fakeuser4@localhost", "fakeUser4", 90, [2297, 2309]) # pepe y zura
+    fu1 = UserSimulation("fakeuser1@localhost", "fakeUser1", 15, [2831, 2827]) # ivan y marta
+    fu2 = UserSimulation("fakeuser2@localhost", "fakeUser2", 45, [2829, 2825]) # yusuf y clara
+    fu3 = UserSimulation("fakeuser3@localhost", "fakeUser3", 70, [2823, 2819]) # yessi y antonio
+    fu4 = UserSimulation("fakeuser4@localhost", "fakeUser4", 90, [2821, 2817]) # vane y benja
     fu1.start()
     fu2.start()
     fu3.start()

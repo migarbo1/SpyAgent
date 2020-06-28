@@ -1,11 +1,9 @@
 import usuario
 from spade.agent import Agent
 from spade.behaviour import PeriodicBehaviour
-import time
 import random
 import requests
 import auxiliar_methods as am
-import queue
 
 
 class SpyAgent(Agent):
@@ -19,7 +17,7 @@ class SpyAgent(Agent):
         self.max_changes = len(agent_guid_pool) - 1
 
     async def setup(self):
-        beh = self.SpyUsers(period=45)  # has to be set to 15 minutes
+        beh = self.SpyUsers(period=90)  # has to be set to 15 minutes
         self.add_behaviour(beh)
         print('agent ready')
 
@@ -76,12 +74,13 @@ class SpyAgent(Agent):
                 for i in range(len(spy.users_retrived)):
                     if f == spy.users_retrived[i].guid:
                         print('making an user my friend')
-                        spy.users_retrived[i] = spy.users_retrived[i].now_is_friend()
+                        spy.users_retrived[i].is_friend = True
             print('friendlist updated')
 
             print('preparing to send a lot of messages')
             for i in range(len(spy.users_retrived)):
                 u = spy.users_retrived[i]
+                print(u.to_String())
                 print('user selected, about to send him a message')
                 if not u.is_friend:
                     info = u.information[0]  # no ha hecho falta check_conversation
@@ -119,8 +118,8 @@ class SpyAgent(Agent):
                         print('user ' + str(u.guid) + ' already is my friend, so my job with him is done.' +
                               ' Removing him from the contact list. i\'ve sent him ' +
                               str(u.messages_received)
-                              + ' messages about ' + u.last_theme)
-                if spy.users_retrived[i].messages_received == 3:
+                              + ' messages about ' + str(u.last_theme))
+                if spy.users_retrived[i].messages_received > 0 and spy.users_retrived[i].messages_received % 3 == 0:
                     spy.users_retrived[i].information.pop(0)
                     spy.require_pers_change = True
 
@@ -146,6 +145,7 @@ class SpyAgent(Agent):
                         spy.users_retrived[i].is_friend = True
             print('process finished')
             print('Reporting stats...')
+            print(len(spy.users_retrived))
             am.plot_results(spy.users_retrived)
 
 
