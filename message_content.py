@@ -1,43 +1,65 @@
 
 themes = {0: "película", 1: "deporte", 2: "mascota", 3: "música", 4: "videojuego"}
 
-selections = {0: "El Señor de los Anillos", 1: "Tenis", 2: "Conejo", 3: "Rock", 4: "GTA"}
 
 predef_msg = {
     ("deporte",
-     "Fútbol"): " el fútbol. A mi me encanta jugar. ¿Te gusta más jugar o verlo? Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos para jugar un dia?",
+     "Fútbol"): " el fútbol. A mi me encanta jugar. ¿Te gusta más jugar o verlo? "
+                "Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos para jugar un dia?",
     ("deporte",
-     "Tenis"): " el tenis. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos para jugar un dia?",
+     "Tenis"): " el tenis. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad "
+               "¿Nos hacemos amigos y quedamos para jugar un dia?",
     ("deporte",
-     "Voleybol"): " jugar a voleybol. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos para jugar un dia?",
+     "Voleybol"): " jugar a voleybol. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad "
+                  "¿Nos hacemos amigos y quedamos para jugar un dia?",
     ("deporte",
-     "Natación"): " practicar natación. Yo suelo ir mucho a la piscina.  Te he enviado una petición de amistad ¿Nos hacemos amigos y vamos un día juntos?",
+     "Natación"): " practicar natación. Yo suelo ir mucho a la piscina.  "
+                  "Te he enviado una petición de amistad ¿Nos hacemos amigos y vamos un día juntos?",
     ("deporte",
-     "Balonecsto"): " el baloncesto. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos para jugar un dia?",
+     "Balonecsto"): " el baloncesto. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad "
+                    "¿Nos hacemos amigos y quedamos para jugar un dia?",
     ("deporte",
-     "Atletismo"): " el atletismo. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos para jugar un dia?",
+     "Atletismo"): " el atletismo. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad "
+                   "¿Nos hacemos amigos y quedamos para jugar un dia?",
     ("deporte",
-     "Pádel"): " el pádel. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos para jugar un dia?",
+     "Pádel"): " el pádel. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad "
+               "¿Nos hacemos amigos y quedamos para jugar un dia?",
     ("deporte",
-     "Ballet"): " bailar ballet. Si fuesemos amigos podríamos bailar juntos. ¿Qué te parece? ¿Nos hacemos amigos?",
+     "Ballet"): " bailar ballet. Si fuesemos amigos podríamos bailar juntos. ¿Qué te parece? "
+                "¿Nos hacemos amigos?",
     ("película",
-     "Batman"): " las películas de Batman. ¿Cuál es tu favorita? La mia es La Leyenda Renace.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "Batman"): " las películas de Batman. ¿Cuál es tu favorita? La mia es La Leyenda Renace. "
+                "Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
     ("película",
-     "Piratas del Caribe"): " las películas de Piratas del Caribe ¿Cuál es tu favorita? La mia es la primera.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "Piratas del Caribe"): " las películas de Piratas del Caribe ¿Cuál es tu favorita? "
+                            "La mia es la primera.  Te he enviado una petición de amistad "
+                            "¿Nos hacemos amigos y quedamos un dia para verla?",
     ("película",
-     "Harry Potter"): " las películas de Harry Potter. ¿Cuál es tu favorita? La mia es el prisionero de Azkaban.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "Harry Potter"): " las películas de Harry Potter. ¿Cuál es tu favorita? "
+                      "La mia es el prisionero de Azkaban.  Te he enviado una petición de amistad "
+                      "¿Nos hacemos amigos y quedamos un dia para verla?",
     ("película",
-     "El Señor de los Anillos"): " las películas de El Señor de los Anillos. ¿Cuál es tu favorita? La mia es El retorno del rey.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "El Señor de los Anillos"): " las películas de El Señor de los Anillos. ¿Cuál es tu favorita? "
+                                 "La mia es El retorno del rey.  Te he enviado una petición de amistad "
+                                 "¿Nos hacemos amigos y quedamos un dia para verla?",
     ("película",
-     "Los juegos del Hambre"): " las películas de Los juegos del Hambre. ¿Cuál es tu favorita? La mia es Sinsajo Parte 1.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "Los juegos del Hambre"): " las películas de Los juegos del Hambre. ¿Cuál es tu favorita? "
+                               "La mia es Sinsajo Parte 1.  Te he enviado una petición de amistad "
+                               "¿Nos hacemos amigos y quedamos un dia para verla?",
     ("película",
-     "Star Wars"): " las películas de Star Wars. ¿Cuál es tu favorita? La mia es la última.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "Star Wars"): " las películas de Star Wars. ¿Cuál es tu favorita? La mia es la última. "
+                   "Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
     ("película",
-     "Jurassic Park"): " las películas de Jurassic Park. ¿Cuál es tu favorita? La mia es la primera.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "Jurassic Park"): "las películas de Jurassic Park. ¿Cuál es tu favorita? La mia es la primera.  "
+                       "Te he enviado "
+                       "una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
     ("película",
-     "Los Vengadores"): " las películas de Los Vengadores. ¿Cuál es tu favorita? La mia es Endgame.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "Los Vengadores"): "las películas de Los Vengadores. ¿Cuál es tu favorita? La mia es Endgame. "
+                        " Te he enviado una "
+                        "petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
     ("película",
-     "Disney"): " las películas de Disney. ¿Cuál es tu favorita? La mia es la sirenita.  Te he enviado una petición de amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
+     "Disney"): "las películas de Disney. ¿Cuál es tu favorita? La mia es la sirenita.  Te he enviado una petición de "
+                "amistad ¿Nos hacemos amigos y quedamos un dia para verla?",
     ("mascota",
      "Perro"): " los perros. ¿Tienes uno como mascota? Yo tengo una, se llama Noa. Si fuesemos amigos podríamos quedar para sacarlos a pasear. ¿Nos hacemos amigos?",
     ("mascota",
