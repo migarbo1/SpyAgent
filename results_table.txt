@@ -1,0 +1,16 @@
+2821	Manolo	False	True	1	2
+2829	Manolo	False	False	3	2
+2827	Manolo	False	True	1	2
+2819	Manolo	False	False	3	2
+2825	Manolo	False	False	3	2
+2831	Manolo	False	False	3	2
+2817	Manolo	False	True	2	2
+2823	Manolo	False	True	1	2
+2821	Pedrito	False	False	3	3
+2829	Pedrito	False	False	3	3
+2825	Pedrito	False	True	3	3
+2827	Pedrito	False	True	1	3
+2819	Pedrito	False	True	1	3
+2831	Pedrito	False	False	3	3
+2823	Pedrito	False	True	2	3
+2817	Pedrito	False	False	3	3

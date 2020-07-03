@@ -64,28 +64,39 @@ class UserSimulation(Agent):
 if __name__ == "__main__":
     # 3 tipos parametrizables en %.
     guids = [2831, 2827, 2829, 2825, 2823, 2819, 2821, 2817]
-    t1 = 2
-    t2 = 2
-    t3 = len(guids) - (t1 + t2)
-    ts = [t1, t1 + t2, t3]
+
+    correct_param = False
+    while not correct_param:
+        print('¿cuántos usuarios quieres tener en activo? Como máximo pueden ser ' + str(len(guids)))
+        max = int(input())
+        guids = guids[0:max]
+        print('Introduce el número de agentes introvertidos (número entero desde 0 hasta ' + str(len(guids)) + ')')
+        t1 = int(input())
+        print('Introduce el número de agentes extrovertidos (número entero desde 0 hasta ' + str(len(guids) - t1) + ')')
+        t3 = int(input())
+        t2 = len(guids) - (t1 + t3)
+        ts = [t1, t2, t3]
+        if t1 >= 0 and t2 >= 0 and t3 >= 0:
+            correct_param = True
+        else:
+            print('parámetros incorrectos, vuelvelo a intentar')
     users = []
 
-    for i in range(len(guids)):
-        if i < ts[0]:
-            p = 25
-        elif i < ts[1]:
-            p = 50
-        else:
-            p = 75
-        u = FakeUser(guids[i], False, False, p)
-        users.append(u)
+    dict = {t1: [], t2: [], t3: []}
 
-    base = 0
-    for i in range(3):
-        aux = ts[i]
-        fu = UserSimulation("fakeuser" + str(i) + "@localhost", "fakeUser" + str(i), users[base:aux])
+    cont = 0
+    for t in ts:
+        for i in range(t):
+            u = FakeUser(guids[cont], False, False, 25)
+            dict[t].append(u)
+            cont += 1
+
+    with open('pherodict.txt') as file:
+        file.write(str(dict))
+
+    for i in range(len(dict.keys())):
+        fu = UserSimulation("fakeuser" + str(i) + "@localhost", "fakeUser" + str(i), dict[ts[i]])
         fu.start()
-        base = aux
 
     '''fu1 = UserSimulation("fakeuser1@localhost", "fakeUser1", 15, [2831, 2827])  # ivan y marta
     fu2 = UserSimulation("fakeuser2@localhost", "fakeUser2", 45, [2829, 2825])  # yusuf y clara

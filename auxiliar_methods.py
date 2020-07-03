@@ -158,6 +158,13 @@ def plot_results(users):
     f4.savefig('identity_histogram.png')
 
 
+def table_results(user_Array):
+    with open("results_table.txt", 'a') as file:
+        for u in user_Array:
+            file.write(
+                str(u.guid) + "\t" + u.contacted_by + "\t" + str(u.initially_friend) + "\t" + str(u.is_friend) + "\t" + str(u.messages_received) + "\t" + str(u.last_theme) + "\n")
+
+
 def any_one_or_two(ar):
     for a in ar:
         n = a[-1]
