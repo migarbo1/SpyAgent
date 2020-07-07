@@ -37,6 +37,8 @@ class UserSimulation(Agent):
                                                'friend2': j}
                                        )
                     print(res.json())
+                with open('users_index.txt', 'a') as file:
+                    file.write('id: ' + str(user.guid) + ' phe: ' + str(user.pheromone) + "\n")
 
         async def run(self):
             for gu in self.agent.users:
@@ -63,13 +65,13 @@ class UserSimulation(Agent):
 
 if __name__ == "__main__":
     # 3 tipos parametrizables en %.
-    guids = [2831, 2827, 2829, 2825, 2823, 2819, 2821, 2817]
+    guIds = [2831, 2827, 2829, 2825, 2823, 2819, 2821, 2817]
 
     correct_param = False
     while not correct_param:
-        print('¿cuántos usuarios quieres tener en activo? Como máximo pueden ser ' + str(len(guids)))
+        print('¿cuántos usuarios quieres tener en activo? Como máximo pueden ser ' + str(len(guIds)))
         max = int(input())
-        guids = guids[0:max]
+        guids = guIds[0:max]
         print('Introduce el número de agentes introvertidos (número entero desde 0 hasta ' + str(len(guids)) + ')')
         t1 = int(input())
         print('Introduce el número de agentes extrovertidos (número entero desde 0 hasta ' + str(len(guids) - t1) + ')')
@@ -85,14 +87,16 @@ if __name__ == "__main__":
     dict = {t1: [], t2: [], t3: []}
 
     cont = 0
+    n = 1
     for t in ts:
         for i in range(t):
-            u = FakeUser(guids[cont], False, False, 25)
+            u = FakeUser(guids[cont], False, False, 25 * n)
             dict[t].append(u)
             cont += 1
+        n+=1
 
-    with open('pherodict.txt') as file:
-        file.write(str(dict))
+    with open('users_index.txt', 'w') as f:
+        f.write('')
 
     for i in range(len(dict.keys())):
         fu = UserSimulation("fakeuser" + str(i) + "@localhost", "fakeUser" + str(i), dict[ts[i]])
