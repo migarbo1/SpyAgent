@@ -23,7 +23,7 @@ class UserSimulation(Agent):
 
     class UserBehaviour(PeriodicBehaviour, Agent):
         def __init__(self, agent):
-            super().__init__(period=60)
+            super().__init__(period=90)
             self.agent = agent
 
         async def on_start(self):
@@ -65,13 +65,29 @@ class UserSimulation(Agent):
 
 if __name__ == "__main__":
     # 3 tipos parametrizables en %.
-    guIds = [2831, 2827, 2829, 2825, 2823, 2819, 2821, 2817]
+    # guIds = [2831, 2827, 2829, 2825, 2823, 2819, 2821, 2817]
+
+    agent_guid_pool = [1421, 1595]
+
+    res = requests.get('http://localhost/services/api/rest/json/?',
+                       params={'method': 'users.return_users'}
+                       )
+    if res:
+        content = res.json()
+        if content['status'] == 0:
+            content = content['result']
+            guIds = list(content.keys())
+
+    for i in agent_guid_pool:
+        if i in guIds:
+            guIds.remove(i)
+
+    guIds.sort()
+
 
     correct_param = False
     while not correct_param:
-        print('¿cuántos usuarios quieres tener en activo? Como máximo pueden ser ' + str(len(guIds)))
-        max = int(input())
-        guids = guIds[0:max]
+        guids = guIds
         print('Introduce el número de agentes introvertidos (número entero desde 0 hasta ' + str(len(guids)) + ')')
         t1 = int(input())
         print('Introduce el número de agentes extrovertidos (número entero desde 0 hasta ' + str(len(guids) - t1) + ')')

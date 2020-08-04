@@ -99,6 +99,8 @@ predef_msg = {
     ("videojuego",
      "Mario"): " jugar a Mario. ¿Cuál es tu juego de Mario favorito? El mio es Super Mario Bros. Aunque me gustaría saber más juegos de Mario. Te he enviado una peticiń de amistad ¿Quieres ser mi amigo y hablamos sobre los juegos que nos gustan de Mario?",
     ("videojuego",
+     "Farcry"): " jugar a Farcry. ¿Cuál es tu juego de Mario favorito? El mio es el 5. Te he enviado una peticiń de amistad ¿Quieres ser mi amigo y hablamos sobre Farcry?",
+    ("videojuego",
      "Minecraft"): " jugar a Minecraft. ¿Sigues también a Vegeta777 y Wilirrex? Yo si, de hecho descubrí una manera de entrar a sus partidas de Minecraft. Te he enviado una petición de amistad ¿Nos hacemos amigos y te cuento cómo hacerlo?",
     ("videojuego",
      "Clash of Clans"): " jugar a Clash of Clans. ¿Cuál es tu clan? El mio es Lords_Of_War. Somos todos ayuntamiento 13 con todo al máximo. Hemos descubierto una manera de ganar gemas infinitas. Si quieres te la puedo contar. Te he enviado una petición de amistad ¿Nos hacemos amigos y te cuento cómo?",

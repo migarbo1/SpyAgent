@@ -22,7 +22,7 @@ class SpyAgent(Agent):
     class SpyUsers(PeriodicBehaviour, Agent):
 
         def __init__(self, agent):
-            super().__init__(period=90)
+            super().__init__(period=120)
             self.agent = agent
 
         async def on_start(self):
@@ -85,7 +85,10 @@ class SpyAgent(Agent):
                 print(u.to_String())
                 print('user selected, about to send him a message')
                 if not u.is_friend:
-                    info = u.information[0]  # no ha hecho falta check_conversation
+                    if u.current_info is None:
+                        index = random.randint(0, len(u.information) -1)
+                        u.current_info = u.information[index]
+                    info = u.current_info  # no ha hecho falta check_conversation
                     sub, con = am.head_body_selector(info, u.messages_received, self.agent.agName)
                     self.agent.users_retrived[i].themes_contacted += [info[0]]
                     self.agent.users_retrived[i].last_theme = info[0]
@@ -122,7 +125,7 @@ class SpyAgent(Agent):
                               str(u.messages_received)
                               + ' messages about ' + str(u.last_theme))
                 if self.agent.users_retrived[i].messages_received > 0 and self.agent.users_retrived[i].messages_received % 3 == 0:
-                    self.agent.users_retrived[i].information.pop(0)
+                    # self.agent.users_retrived[i].information.pop(0)
                     self.agent.is_done = True
 
             if self.agent.is_done:

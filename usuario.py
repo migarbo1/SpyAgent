@@ -9,6 +9,7 @@ class Usuario:
         self.messages_received = 0
         self.themes_contacted = []
         self.last_theme = -1
+        self.current_info = None
         self.contacted_by = ''
 
     def to_String(self):
