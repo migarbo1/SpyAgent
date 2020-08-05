@@ -4,6 +4,8 @@ from usuario import Usuario
 import requests
 import random
 
+agent_guid_pool = [1421, 1595]
+nag = 0
 
 class FakeUser(Usuario):
     def __init__(self, guid, initially_friend, is_friend, ph):
@@ -21,36 +23,40 @@ class UserSimulation(Agent):
 
     class UserBehaviour(PeriodicBehaviour, Agent):
         def __init__(self, agent):
-            super().__init__(period=45)
+            super().__init__(period=90)
             self.agent = agent
 
         async def on_start(self):
             for i in range(0, len(self.agent.users)):
                 user = self.agent.users[i]
-                print(str(i) + ' de ' + str(len(self.agent.users)) + ' usuarios listos')
+                for j in agent_guid_pool:
+                    print('deleting friends')
+                    res = requests.get('http://localhost/services/api/rest/json/?',
+                                       params={'method': 'users.remove_friendship',
+                                               'friend1': user.guid,
+                                               'friend2': j}
+                                       )
+                    print(str(nag) + ' de ' + str(len(guids)) + ' usuarios listos')
+                    nag += 1
                 with open('users_index.txt', 'a') as file:
                     file.write('id: ' + str(user.guid) + ' phe: ' + str(user.pheromone) + "\n")
 
         async def run(self):
-            g = ""
-            p = ""
             for gu in self.agent.users:
-                if(g ==""):
-                    g += str(gu.guid)
-                    p += str(gu.pheromone)
-                else:
-                    g += "," + str(gu.guid)
-                    p += "," + str(gu.pheromone)
-
-            res = requests.get('http://localhost/services/api/rest/json/?',
-                               params={'method': 'users.perform_user_simulator',
-                                       'userGuids': g,
-                                       'pheromones': p}
-                               )
-            if res:
-                print('perform response received')
-                content = res.text
-                print(content)
+                print('performing user simulation')
+                res = requests.get('http://localhost/services/api/rest/json/?',
+                                   params={'method': 'users.perform_user_simulator',
+                                           'userGuid': gu.guid,
+                                           'pheromone': gu.pheromone}
+                                   )
+                if res:
+                    print('perform response received')
+                    content = res.json()
+                    print(content)
+                    if content['status'] == 0:
+                        print('perform status good')
+                        content = content['result']
+                        print(content)
 
     async def setup(self):
         beh = self.UserBehaviour(self)
@@ -63,7 +69,7 @@ if __name__ == "__main__":
     # guIds = [2831, 2827, 2829, 2825, 2823, 2819, 2821, 2817]
 
     agent_guid_pool = [1421, 1595]
-    nag = 0
+
     res = requests.get('http://localhost/services/api/rest/json/?',
                        params={'method': 'users.return_users'}
                        )
@@ -73,11 +79,13 @@ if __name__ == "__main__":
             content = content['result']
             guIds = list(content.keys())
 
+    for i in agent_guid_pool:
+        if i in guIds:
+            guIds.remove(i)
+
     guIds.sort()
 
-    res = requests.get('http://localhost/services/api/rest/json/?',
-                       params={'method': 'users.remove_friendship'}
-                       )
+
     correct_param = False
     while not correct_param:
         guids = guIds

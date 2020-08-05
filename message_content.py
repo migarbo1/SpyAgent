@@ -16,7 +16,7 @@ predef_msg = {
      "Natación"): " practicar natación. Yo suelo ir mucho a la piscina.  "
                   "Te he enviado una petición de amistad ¿Nos hacemos amigos y vamos un día juntos?",
     ("deporte",
-     "Balonecsto"): " el baloncesto. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad "
+     "Baloncesto"): " el baloncesto. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad "
                     "¿Nos hacemos amigos y quedamos para jugar un dia?",
     ("deporte",
      "Atletismo"): " el atletismo. ¿Te gusta más jugar o verlo?  Te he enviado una petición de amistad "

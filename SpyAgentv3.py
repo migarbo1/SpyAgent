@@ -107,17 +107,6 @@ class SpyAgent(Agent):
                     else:
                         print('message sent failed')
                         print(sender.json())
-
-                    print('after sending the message, i\'m going to send a friend request')
-                    sender = requests.post('http://localhost/services/api/rest/json/?',
-                                           params={'method': 'users.send_Friend_Request',
-                                                   'agentGUID': self.agent.guid,
-                                                   'receiverGUID': u.guid})
-                    if sender:
-                        print('message sent with exit with status: ' + str(sender.json()))
-                        content = sender.json()
-                        if content['status'] == -1:
-                            print('I\'ve already sent him a friend request and he hasn\'t answered yet')
                 else:
                     if not u.initially_friend:
                         print('user ' + str(u.guid) + ' already is my friend, so my job with him is done.' +
